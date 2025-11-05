@@ -7,8 +7,12 @@ const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 app.use(cors({
-  origin: "https://campus-ride-gray.vercel.app/",
-  credentials: true,
+  origin: [
+    "http://localhost:5173",               // for local dev
+    "https://campus-ride-gray.vercel.app"  // your deployed frontend
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
 app.use(express.json()); 
 
