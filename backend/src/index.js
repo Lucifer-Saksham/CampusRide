@@ -7,7 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 app.use(cors({
-  origin: ["http://localhost:5173", "https://campus-ride-gray.vercel.app/"],
+  origin: "https://campus-ride-gray.vercel.app/",
   credentials: true,
 }));
 app.use(express.json()); 
