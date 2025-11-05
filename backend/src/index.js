@@ -6,7 +6,10 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:5173", "https://campus-ride-gray.vercel.app/"],
+  credentials: true,
+}));
 app.use(express.json()); 
 
 connectDB(process.env.MONGO_URI);
