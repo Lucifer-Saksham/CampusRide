@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5050/api",
+  baseURL: "https://campusride-9i7k.onrender.com",
 });
 
 axiosInstance.interceptors.request.use((config) => {
