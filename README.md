@@ -1,16 +1,16 @@
-#🚗 CampusRide – Student Carpool Platform
+# 🚗 CampusRide – Student Carpool Platform
 
 CampusRide is a full-stack web application that enables students to share rides, reduce travel costs, and make commuting more efficient.
 It allows users to sign up, log in, offer rides, join rides, and manage their travel data securely using JWT authentication and a MongoDB Atlas cloud database.
 
-#🌐 Hosted Links
+# 🌐 Hosted Links
 Component	Platform	URL
-##🌍 Frontend (React)	Vercel	https://campus-ride-gray.vercel.app
+## 🌍 Frontend (React)	Vercel	https://campus-ride-gray.vercel.app
 
-##⚙️ Backend (Node.js + Express)	Render	https://campusride-9i7k.onrender.com
+## ⚙️ Backend (Node.js + Express)	Render	https://campusride-9i7k.onrender.com
 
-##🗄️ Database (MongoDB Atlas)	Cloud	Connected via Mongoose ORM
-#🧠 Project Overview
+## 🗄️ Database (MongoDB Atlas)	Cloud	Connected via Mongoose ORM
+# 🧠 Project Overview
 
 CampusRide solves the problem of expensive solo cab rides by letting students connect and share their rides.
 Each user can offer a ride, join existing rides, or view rides offered by others — making it convenient and eco-friendly.
