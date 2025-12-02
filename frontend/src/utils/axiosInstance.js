@@ -1,7 +1,11 @@
 import axios from "axios";
 
+// Use Vite environment variable `VITE_API_URL` for production (Render).
+// Fallback to localhost for local development.
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5050/api";
+
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5050/api",
+  baseURL: BASE_URL,
 });
 
 axiosInstance.interceptors.request.use((config) => {
