@@ -1,151 +1,192 @@
-# 🚗 CampusRide – Student Carpool Platform
+# 🚗 CampusRide – Smart Ride-Sharing System for College Students
 
-CampusRide is a full-stack web application that enables students to share rides, reduce travel costs, and make commuting more efficient.
-It allows users to sign up, log in, offer rides, join rides, and manage their travel data securely using JWT authentication and a MongoDB Atlas cloud database.
+## 1. Project Proposal
 
-# 🌐 Hosted Links
-Component	Platform	URL
-## 🌍 Frontend (React)	Vercel	https://campus-ride-gray.vercel.app
+### Project Title
+CampusRide – Smart Ride-Sharing System for College Students
 
-## ⚙️ Backend (Node.js + Express)	Render	https://campusride-9i7k.onrender.com
+### Problem Statement
+Many college students frequently book cabs or autos for short-distance travel to campus, hostels, nearby cafés, weekend hangouts and multiple college or social events. However, these solo rides often cost more and increase carbon emissions.
 
-## 🗄️ Database (MongoDB Atlas)	Cloud	Connected via Mongoose ORM
-# 🧠 Project Overview
+CampusRide aims to solve this by enabling students who are already booking cabs to post their ride details so that other students traveling in the same direction can join and split the fare. This makes commuting more affordable, social, and sustainable — designed specifically for verified college students.
 
-CampusRide solves the problem of expensive solo cab rides by letting students connect and share their rides.
-Each user can offer a ride, join existing rides, or view rides offered by others — making it convenient and eco-friendly.
+### System Architecture
+Frontend → Backend (API) → Database
 
-In this phase (Evaluation 1), the focus is on building:
+Example Stack
+- Frontend: React.js, React Router, Axios, TailwindCSS
+- Backend: Node.js + Express
+- Database: MongoDB Atlas
+- Authentication: JWT-based login/signup
+- Hosting:
+  - Frontend: Vercel
+  - Backend: Render / Railway
+  - Database: MongoDB Atlas
 
-User Authentication System (Signup/Login)
+Architecture Flow
+1. A student books or plans a cab ride and posts trip details on CampusRide.
+2. Other verified students can search for available rides going in the same direction.
+3. Students can join the ride and split fare details are shown on-screen.
+4. Backend manages authentication, ride sharing, and ride join requests.
+5. Data is stored in MongoDB for all rides, users, and shared trips.
 
-JWT-based Token Verification
+## 2. Key Features
 
-Password Encryption with bcrypt
+### Authentication & Authorization
+- Student signup/login using verified college email, JWT-based authentication, role-based access (ride creator vs. joiner).
 
-Connected Frontend and Backend via Axios
+### Ride Creation & Sharing
+- Students can post details of an upcoming cab ride — pickup point, destination, time, available seats, and estimated cost per person.
 
-Deployed Full-Stack Application
+### Ride Joining
+- Other students can view available rides and request to join based on pickup/drop proximity and timing.
 
-🛠️ Tech Stack
-Layer	Technology	Purpose
-Frontend	React (Vite)	UI & Routing
-Backend	Node.js + Express	API logic
-Database	MongoDB Atlas	Cloud Data Storage
-Authentication	JWT (JSON Web Token)	Secure login system
-Password Hashing	bcrypt	Data security
-API Requests	Axios	Frontend ↔ Backend communication
-Deployment	Render (Backend), Vercel (Frontend)	Cloud hosting
-🔐 Authentication System (Evaluation 1)
-✳️ Features Implemented
+### CRUD Operations
+- Students can create, view, update, and delete rides. Joiners can cancel or leave rides.
 
-User Signup & Login
+### Fare Split Calculator
+- Automatically divides estimated total fare among joined students.
 
-JWT-based Authentication
+### Frontend Routing
+- Pages: Home, Login/Signup, Offer Ride, Find Ride, Dashboard, Profile.
 
-Protected API Routes
+### Pagination, Searching, Sorting, Filtering
+- Paginate ride lists using `?page=&limit=` parameters.
+- Search rides by pickup point, destination, or time.
+- Sort rides by time, fare, or available seats.
+- Filter rides by trip type (campus commute, home return, event outing) and ride status (open/closed).
 
-Password Hashing with bcrypt
+### Hosting & Deployment
+- Fully deployed frontend and backend with public URLs and live API integration.
 
-Token stored in localStorage (frontend)
+### Full CRUD Operations
+- Students and admins can Create, Read, Update, and Delete rides and user accounts via connected APIs.
 
-Middleware for route protection
+## 3. Tech Stack
 
-CORS setup for frontend-backend communication
+| Layer | Technologies |
+|---|---|
+| Frontend | React.js, React Router, Axios, TailwindCSS |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas |
+| Authentication | JWT-based login/signup, college email verification |
+| AI | Ride suggestion system based on location similarity (optional/future) |
+| Hosting | Vercel (frontend), Render / Railway (backend), MongoDB Atlas (DB) |
 
-🔧 Signup Flow
+## 4. API Overview
 
-User submits signup form (name, email, password)
+### Authentication APIs
+| Endpoint | Method | Description | Access |
+|---|---:|---|---|
+| /api/auth/signup | POST | Register new student (Create User) | Public |
+| /api/auth/login | POST | Authenticate student and return JWT | Public |
+| /api/auth/profile | GET | Get logged-in student profile | Auth |
+| /api/auth/profile | PUT | Update logged-in student profile | Auth |
+| /api/auth/delete | DELETE | Delete logged-in student account | Auth |
 
-Backend checks if user already exists
+### User Management APIs
+| Endpoint | Method | Description | Access |
+|---|---:|---|---|
+| /api/users | GET | Fetch all students (Admin only) | Admin |
+| /api/users/:id | GET | Fetch student by ID | Admin |
+| /api/users/:id | PUT | Update student details | Admin |
+| /api/users/:id | DELETE | Remove student | Admin |
 
-Password is hashed using bcrypt
+### Ride Management (Full CRUD)
+| Endpoint | Method | Description | Access |
+|---|---:|---|---|
+| /api/rides | POST | Offer a new ride (Create) | Student |
+| /api/rides | GET | Get all rides (Read) | Public |
+| /api/rides/:id | GET | Get ride by ID (Read One) | Auth |
+| /api/rides/:id | PUT | Update ride info (Update) | Student |
+| /api/rides/:id | DELETE | Delete ride (Delete) | Student/Admin |
+| /api/rides/user | GET | Get rides by logged-in student | Auth |
 
-User is saved to MongoDB Atlas
+### Ride Join & Fare Management
+| Endpoint | Method | Description | Access |
+|---|---:|---|---|
+| /api/rides/:id/join | POST | Join a ride | Student |
+| /api/rides/:id/leave | PUT | Leave a joined ride | Student |
+| /api/rides/:id/complete | PUT | Mark ride as completed | Student |
+| /api/rides/:id/fare-split | GET | Calculate split fare per student | Auth |
 
-Backend generates a JWT token and sends it to frontend
+## 5. Dynamic Data Fetching
 
-Token is stored in localStorage for session persistence
+All frontend pages (Find Ride, Offer Ride, Dashboard, and Profile) dynamically fetch and update data using REST APIs via Axios. The data displayed (rides, users, fare splits) is loaded live from MongoDB Atlas using the backend API. Users can create, edit, or delete rides, and the interface updates instantly using API responses.
 
-🔑 Login Flow
+## 6. Evaluation & Interview Preparation Checklist
 
-User enters email and password
+Make sure the following are implemented and verifiable before approaching the evaluation team.
 
-Backend verifies user and compares password hash
+### Functional Evaluation Metrics
+- Backend Functionality: Minimum 2 Create, 2 Read, 2 Update, and 2 Delete operations implemented end-to-end (auth-related CRUD does not count).
+- Pagination, searching, sorting, and filtering must work through backend API calls.
 
-If valid, JWT token is generated and returned
+### Hosting Verification
+- Open hosted frontend → Inspect → Network (Fetch/XHR) → verify API responses.
+- Open hosted database (MongoDB Atlas) → verify that entries are created/updated.
 
-Token is saved on the frontend and used for further requests
+### Documentation Requirements
+- Hosted frontend URL must be clearly mentioned in this README.
+- Proposal (this document) must be included in `README.md` (done).
+- Problem statement must match the implementation; evaluators will verify this.
 
-🧩 Protected Routes
+### Interview Prep (One-to-One Discussion)
+Be ready to introduce yourself and cover:
+- Past experiences (internships or major projects)
+- Technical skills and strengths
+- Biggest challenge faced and how you solved it
 
-Axios automatically attaches JWT token to every request using an interceptor:
+### Machine Coding & JavaScript Viva
+Be ready for:
+- One easy JS coding problem (e.g., polyfills for map/filter/reduce, .filter() usage, deep cloning)
+- One medium-level viva question (topics: `this`, Promise combinators like `Promise.all` vs `Promise.any` vs `Promise.race`)
 
-axiosInstance.interceptors.request.use(config => {
-  const token = localStorage.getItem("token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
-});
+## 7. How to Run Locally
 
+1. Clone the repo and install dependencies:
+```bash
+git clone <repo-url>
+cd CampusRide/backend
+npm install
+cd ../frontend
+npm install
+```
 
-Backend verifies token before allowing access:
+2. Start development servers:
+```bash
+# backend
+cd backend
+npm run dev
 
-const jwt = require("jsonwebtoken");
-const protect = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  req.user = decoded;
-  next();
-};
+# frontend
+cd frontend
+npm run dev
+```
 
-🧩 API Overview (Full CRUD Planned)
-Endpoint	Method	Description
-/api/auth/signup	POST	Register a new user
-/api/auth/login	POST	Authenticate user and return JWT
-/api/auth/profile	GET	Get logged-in user profile
-/api/auth/profile	PUT	Update user profile
-/api/auth/delete	DELETE	Delete user account
-/api/rides	POST	Create new ride (Offer a ride)
-/api/rides	GET	Get all available rides
-/api/rides/:id	PUT	Update ride details
-/api/rides/:id	DELETE	Delete a ride
-/api/rides/:id/join	POST	Join an existing ride
-⚡ Dynamic Data Handling
+3. Configure environment variables (create `.env` in `backend`):
+- MONGO_URI=your_mongo_connection_string
+- JWT_SECRET=your_jwt_secret
+- CORS_ORIGINS=https://campus-ride-gray.vercel.app,http://localhost:5173
 
-All frontend pages (Login, Signup, Dashboard) dynamically fetch and update data using Axios.
-Each interaction (signup/login) triggers live API requests to the backend, fetching real data from MongoDB Atlas — no static content.
+## 8. Hosted Links
 
-🧱 Project Architecture
-Frontend (Vercel)
-   ↓ Axios API Calls
-Backend (Render, Express.js)
-   ↓ Mongoose ORM
-MongoDB Atlas (Cloud Database)
+| Component | Platform | URL |
+|---|---|---|
+| Frontend | Vercel | https://campus-ride-gray.vercel.app |
+| Backend | Render | https://campusride-9i7k.onrender.com |
+| Database | MongoDB Atlas | Connected (private) |
 
-💡 Security Features
-Feature	Description
-JWT Authentication	Token-based verification for user identity
-Password Hashing	bcrypt ensures passwords are unreadable
-CORS	Allows only specific domains (localhost + Vercel)
-Environment Variables	Securely store credentials & secret keys
-🚀 Hosting Setup
-Platform	Purpose	Command / Step
-Render	Host backend (Express app)	Connect repo → Root directory: backend → Start: npm start
-Vercel	Host frontend (React app)	Connect repo → Root directory: frontend → Build: npm run build
-MongoDB Atlas	Cloud DB	Add connection string to .env
-🧠 Learning Outcomes
+## 9. Notes & Next Steps
 
-Through this project, I learned:
+- Replace `alert()` UI with in-app toasts for better UX (recommended).
+- Add E2E tests for critical flows (signup/login, offer ride, join ride).
+- Consider rate-limiting and improved logging for production.
 
-How to build RESTful APIs
+---
 
-How JWT authentication works internally
+If you'd like, I can now:
+- Add the evaluation checklist as a GitHub Issues template.
+- Create a small `DEPLOYMENT.md` with step-by-step Render and Vercel deployment notes.
+- Replace `alert()` calls with a toast system and wire it into the UI.
 
-Password encryption using bcrypt
-
-Frontend-backend communication via Axios
-
-Deploying full-stack projects online
-
-Debugging hosting issues and CORS policies
