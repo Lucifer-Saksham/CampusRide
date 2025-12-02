@@ -11,15 +11,53 @@ export default function Navbar() {
   };
 
   return (
-    <nav style={{ padding: "10px", background: "#f8f9fa" }}>
-      <Link to="/signup" style={{ marginRight: 10 }}>Signup</Link>
-      <Link to="/login" style={{ marginRight: 10 }}>Login</Link>
-      {token && (
-        <>
-          <Link to="/dashboard" style={{ marginRight: 10 }}>Dashboard</Link>
-          <button onClick={handleLogout}>Logout</button>
-        </>
-      )}
+  <nav className="bg-surface/80 backdrop-blur-md border-b border-gray-700/30 sticky top-0 z-50 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <Link to="/" className="text-2xl font-black text-gray-100 hover:opacity-80 transition">
+            Campus<span className="gradient-text">Ride</span>
+          </Link>
+          <div className="flex gap-3 sm:gap-5 items-center">
+            {token ? (
+              <>
+                <Link to="/find-ride" className="text-sm text-gray-200 hover:text-primary-300 font-semibold transition hidden sm:block">
+                  Find Ride
+                </Link>
+                <Link to="/offer-ride" className="text-sm text-gray-200 hover:text-primary-300 font-semibold transition hidden sm:block">
+                  Offer Ride
+                </Link>
+                <Link to="/dashboard" className="text-sm text-gray-200 hover:text-primary-300 font-semibold transition">
+                  Dashboard
+                </Link>
+                <Link to="/profile" className="text-sm text-gray-200 hover:text-primary-300 font-semibold transition">
+                  Profile
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 text-sm text-gray-200 hover:text-white font-semibold transition"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="text-sm text-gray-200 hover:text-primary-300 font-semibold transition"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="px-5 py-2 text-sm bg-gradient-to-r from-brandBright to-primary-600 text-white rounded-lg hover:from-brandBright hover:to-primary-700 transition font-semibold shadow-md"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
     </nav>
   );
 }
