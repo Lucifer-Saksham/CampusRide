@@ -114,79 +114,11 @@ Architecture Flow
 
 All frontend pages (Find Ride, Offer Ride, Dashboard, and Profile) dynamically fetch and update data using REST APIs via Axios. The data displayed (rides, users, fare splits) is loaded live from MongoDB Atlas using the backend API. Users can create, edit, or delete rides, and the interface updates instantly using API responses.
 
-## 6. Evaluation & Interview Preparation Checklist
-
-Make sure the following are implemented and verifiable before approaching the evaluation team.
-
-### Functional Evaluation Metrics
-- Backend Functionality: Minimum 2 Create, 2 Read, 2 Update, and 2 Delete operations implemented end-to-end (auth-related CRUD does not count).
-- Pagination, searching, sorting, and filtering must work through backend API calls.
-
-### Hosting Verification
-- Open hosted frontend → Inspect → Network (Fetch/XHR) → verify API responses.
-- Open hosted database (MongoDB Atlas) → verify that entries are created/updated.
-
-### Documentation Requirements
-- Hosted frontend URL must be clearly mentioned in this README.
-- Proposal (this document) must be included in `README.md` (done).
-- Problem statement must match the implementation; evaluators will verify this.
-
-### Interview Prep (One-to-One Discussion)
-Be ready to introduce yourself and cover:
-- Past experiences (internships or major projects)
-- Technical skills and strengths
-- Biggest challenge faced and how you solved it
-
-### Machine Coding & JavaScript Viva
-Be ready for:
-- One easy JS coding problem (e.g., polyfills for map/filter/reduce, .filter() usage, deep cloning)
-- One medium-level viva question (topics: `this`, Promise combinators like `Promise.all` vs `Promise.any` vs `Promise.race`)
-
-## 7. How to Run Locally
-
-1. Clone the repo and install dependencies:
-```bash
-git clone <repo-url>
-cd CampusRide/backend
-npm install
-cd ../frontend
-npm install
-```
-
-2. Start development servers:
-```bash
-# backend
-cd backend
-npm run dev
-
-# frontend
-cd frontend
-npm run dev
-```
-
-3. Configure environment variables (create `.env` in `backend`):
-- MONGO_URI=your_mongo_connection_string
-- JWT_SECRET=your_jwt_secret
-- CORS_ORIGINS=https://campus-ride-gray.vercel.app,http://localhost:5173
-
-## 8. Hosted Links
+## 6. Hosted Links
 
 | Component | Platform | URL |
 |---|---|---|
 | Frontend | Vercel | https://campus-ride-gray.vercel.app |
 | Backend | Render | https://campusride-9i7k.onrender.com |
 | Database | MongoDB Atlas | Connected (private) |
-
-## 9. Notes & Next Steps
-
-- Replace `alert()` UI with in-app toasts for better UX (recommended).
-- Add E2E tests for critical flows (signup/login, offer ride, join ride).
-- Consider rate-limiting and improved logging for production.
-
----
-
-If you'd like, I can now:
-- Add the evaluation checklist as a GitHub Issues template.
-- Create a small `DEPLOYMENT.md` with step-by-step Render and Vercel deployment notes.
-- Replace `alert()` calls with a toast system and wire it into the UI.
 
