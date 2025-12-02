@@ -7,7 +7,10 @@ const userRoutes = require('./routes/userRoutes');
 const rideRoutes = require('./routes/rideRoutes');
 
 const app = express();
-const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:5173,http://localhost:3000').split(',');
+// Default allowed origins: include deployed frontend on Vercel plus local dev
+const allowedOrigins = (process.env.CORS_ORIGINS || 'https://campus-ride-gray.vercel.app,http://localhost:5173,http://localhost:3000')
+  .split(',')
+  .map(s => s.trim());
 
 app.use(cors({
   origin: function (origin, callback) {
