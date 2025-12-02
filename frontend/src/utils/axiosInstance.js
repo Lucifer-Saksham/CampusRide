@@ -1,11 +1,8 @@
 import axios from "axios";
 
-// Use Vite environment variable `VITE_API_URL` for production (Render).
-// Fallback to localhost for local development.
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5050/api";
-
+// Directly use Render backend URL per request
 const axiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: "https://campusride-9i7k.onrender.com/api",
 });
 
 axiosInstance.interceptors.request.use((config) => {
